@@ -1,22 +1,29 @@
-# 🦾 MuJoCo Humanoid Motion Imitation
-A professional Reinforcement Learning implementation using **Stable-Baselines3** and the **MuJoCo** physics engine.
+# 🦾 Advanced Humanoid Motion Synthesis Framework
 
-## 📌 Project Overview
-This project trains a high-dimensional Humanoid agent (17 joints) to learn locomotion and motion imitation. By utilizing **PPO (Proximal Policy Optimization)**, the agent explores a physics-accurate 3D environment to maximize balance and gait stability.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python: 3.11](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
 
-## 🚀 Technical Features
-- **Physics Engine:** MuJoCo 3.0+
-- **RL Algorithm:** PPO with Multi-Layer Perceptron (MLP) Policy
-- **Hardware Acceleration:** Off-screen EGL rendering on NVIDIA RTX 40-series
-- **Environment:** Gymnasium Humanoid-v5
+A high-performance Reinforcement Learning (RL) framework for **Humanoid Locomotion** and **Motion Imitation** built on MuJoCo and Stable-Baselines3.
 
-## 🛠️ Setup & Usage
-1. **Clone & Install:**
-   ```bash
-   git clone https://github.com/dinesh-reddys/MuJoCo-RL-Imitation.git
-   pip install mujoco stable-baselines3[extra] gymnasium imageio
-   ```
-2. **Train the Agent:**
-   ```bash
-   python scripts/humanoid_imitation.py
-   ```
+## 🌟 Key Engineering Features
+- **Deterministic Pipeline:** Managed via YAML configurations for full reproducibility.
+- **Off-Screen Scalability:** Optimized for headless EGL rendering on NVIDIA RTX/A-series hardware.
+- **DeepMimic Implementation:** Modular reward shaping utilizing exponential tracking for pose and velocity.
+- **Containerized Deployment:** Production-ready Docker support for seamless scaling on AWS/GCP clusters.
+
+## 🛠 Architecture
+```text
+├── assets/             # MoCap data & 3D models
+├── configs/            # Experiment hyperparameters
+├── scripts/            # Core RL logic & reward wrappers
+├── tests/              # CI/CD validation scripts
+├── results/            # Analytics, logs, and video exports
+└── main.py             # Unified framework entry point
+```
+
+## 🚀 Quickstart
+```bash
+# Run via Docker (Recommended)
+docker build -t mujoco-rl .
+docker run --gpus all mujoco-rl python3 main.py --config configs/ppo_humanoid.yaml
+```
