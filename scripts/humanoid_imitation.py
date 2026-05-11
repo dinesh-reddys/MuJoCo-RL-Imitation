@@ -16,7 +16,7 @@ def train_humanoid():
         "MlpPolicy", 
         env, 
         policy_kwargs=policy_kwargs,
-        verbose=1, 
+        verbose=1, tensorboard_log="./logs/tensorboard/", 
         device="cuda", 
         batch_size=128,
         n_steps=2048,

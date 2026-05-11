@@ -1,27 +1,22 @@
 import numpy as np
 import gymnasium as gym
+import torch
 
-class ImitationWrapper(gym.Wrapper):
+class DeepMimicCore:
     """
-    Professional Wrapper for Motion Imitation.
-    Calculates distance between agent state and reference MoCap data.
+    Advanced Reward Calculation based on Peng et al. (DeepMimic).
+    Uses Exponential Pose and Velocity tracking.
     """
-    def __init__(self, env, reference_data=None):
-        super().__init__(env)
-        self.reference_data = reference_data # This would be your MoCap JSON/NPY
+    @staticmethod
+    def compute_reward(agent_pose, ref_pose, agent_vel, ref_vel):
+        # Pose Reward: exp(-2 * ||p_a - p_r||^2)
+        p_diff = np.sum(np.square(agent_pose - ref_pose))
+        r_p = np.exp(-2.0 * p_diff)
         
-    def step(self, action):
-        obs, reward, terminated, truncated, info = self.env.step(action)
+        # Velocity Reward: exp(-0.1 * ||v_a - v_r||^2)
+        v_diff = np.sum(np.square(agent_vel - ref_vel))
+        r_v = np.exp(-0.1 * v_diff)
         
-        # DEEPMIMIC LOGIC: Replace standard reward with tracking reward
-        # Reward = exp(-||reference_pose - current_pose||^2)
-        tracking_reward = self.calculate_imitation_reward(obs)
-        
-        return obs, tracking_reward, terminated, truncated, info
+        return 0.65 * r_p + 0.35 * r_v
 
-    def calculate_imitation_reward(self, obs):
-        # Placeholder for MoCap comparison logic
-        # In a real scenario, you compare obs[:data_dim] with MoCap frame
-        return np.exp(-0.5 * np.sum(np.square(obs))) 
-
-print("✅ Imitation Core logic defined.")
+print("✅ High-fidelity reward math updated.")
