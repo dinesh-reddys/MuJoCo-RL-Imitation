@@ -41,6 +41,9 @@ This project implements a comprehensive framework for physics-based humanoid mot
 
 ### Reward Curve (Humanoid-v4 — PPO)
 \`\`\`text
+
+
+
  Reward
   5000 |                                          ████
   4000 |                               ██████████
@@ -48,8 +51,12 @@ This project implements a comprehensive framework for physics-based humanoid mot
   2000 |          ██████████
   1000 |  ████████
      0 +------------------------------------------→ Steps
-        0      1M     2M     3M     4M     5M
+             0      1M     2M     3M     4M     5M
+
+             
 \`\`\`
+
+
 > *Full high-resolution plots available in \`/results/\`.*
 
 ---
